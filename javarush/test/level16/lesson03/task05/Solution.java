@@ -12,37 +12,12 @@ import java.util.Date;
 */
 
 public class Solution {
+    public static int delay = 1000;
+
     public static void main(String[] args) {
         Thread violin = new Thread(new Violin("Player"));
         violin.start();
     }
-
-    public static class Violin implements MusicalInstrument{
-        private String owner;
-
-        public Violin(String owner) {
-            this.owner = owner;
-        }
-
-        public Date startPlaying() {
-            System.out.println(this.owner + " starts playing");
-            return new Date();
-        }
-
-        public Date stopPlaying() {
-            System.out.println(this.owner + " stops playing");
-            return new Date();
-        }
-        public void run(){
-            long n=startPlaying().getTime();
-            sleepNSeconds(1);
-            long f=stopPlaying().getTime();
-            System.out.printf("Playing %d ms", f-n);
-
-        }
-    }
-
-    public static int delay = 1000;
 
     public static void sleepNSeconds(int n) {
         try {
@@ -56,5 +31,35 @@ public class Solution {
         Date startPlaying();
 
         Date stopPlaying();
+    }
+
+    public static class Violin implements MusicalInstrument {
+        private String owner;
+
+        public Violin(String owner) {
+            this.owner = owner;
+        }
+
+        @Override
+        public Date startPlaying() {
+            System.out.println(this.owner + " starts playing");
+            return new Date();
+        }
+
+        @Override
+        public Date stopPlaying() {
+            System.out.println(this.owner + " stops playing");
+            return new Date();
+        }
+
+        @Override
+        public void run() {
+            long n = startPlaying().getTime();
+            sleepNSeconds(1);
+            long f = stopPlaying().getTime();
+            //blablabla testing git
+            System.out.printf("Playing %d ms", f - n);
+
+        }
     }
 }
